@@ -112,7 +112,7 @@ def extract_features_from_waveform(components_list, statistics_list, waveform):
     return feats_this_waveform
 
 
-def extract_features(waveforms, components_list, statistics_list=None):
+def extract_features(waveforms, components_list, statistics_list=None, progress=False):
     """This is an important function. Given a list of Waveform objects, a list of
     Waveform methods in the form of strings and a list of Barrel methods in the
     form of strings, compute the time-independent features resulting. This function
@@ -133,7 +133,8 @@ def extract_features(waveforms, components_list, statistics_list=None):
             represent individual features.
     """
     output_feats = []
-    waveforms = tqdm(waveforms, desc='Extracting features...')
+    if progress:
+        waveforms = tqdm(waveforms, desc='Extracting features...')
 
     for wave in waveforms:
         output_feats.append(
